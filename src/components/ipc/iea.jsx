@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from '../ipc/header.jsx';
 import '../ipc/home.css';
 
-const CRPC = () => {
+const IEA = () => {
   const [numberSearch, setNumberSearch] = useState('');
   const [textSearch, setTextSearch] = useState('');
   const [data, setData] = useState(null);
@@ -17,7 +17,7 @@ const CRPC = () => {
       if (!response.ok) throw new Error('Failed to fetch data');
 
       const result = await response.json();
-      console.log(`API Response for ${type}:, result`);
+      console.log(`API Response for ${type}:`, result);
 
       if (Object.keys(result).length === 0) {
         throw new Error('No data found');
@@ -109,4 +109,4 @@ const CRPC = () => {
   );
 };
 
-export default CRPC;
+export default IEA;

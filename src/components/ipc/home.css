@@ -42,12 +42,12 @@ body {
   border-radius: 12px;
   text-align: center;
 
-  background-image: url(/src/assets/logo.jpg);
+  /* background-image: url(/src/assets/logo.jpg);
   background-size: contain;
   background-position: top center;
   background-repeat: no-repeat;
   background-color: rgba(255, 255, 255, 0.7);
-  background-blend-mode: lighten;
+  background-blend-mode: lighten; */
 
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   position: relative;
@@ -106,15 +106,36 @@ body {
 
 /* Styling button container */
 .sections-box {
+  position: relative;
   display: flex;
   justify-content: space-evenly;
   gap: 15px;
-  padding: 20px;
-  margin: 20px;
+  padding: 10px 20px;
   align-items: center;
   flex-direction: column;
   height: 80vh;
-  width: 90%;
+  width: 100%;
+
+  background-image: url(/src/assets/logo.jpg);
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.5);
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Lightening overlay */
+.sections-box::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: white; /* or rgba(255,255,255,0.7) for more control */
+  opacity: 0.4; /* Adjust this for lightness */
+  z-index: -1;
 }
 
 /* Button styling */
@@ -195,10 +216,18 @@ body {
   flex-direction: column;
   align-content: flex-start;
   align-items: flex-start;
-  width: 80%;
+  width: 100%;
   height: 100vh;
   flex-grow: 1;
   overflow-y: auto;
+  padding: 10px 20px;
+
+  background-image: url(/src/assets/logo.jpg);
+  background-size: contain;
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 255, 255, 0.7);
+  background-blend-mode: lighten;
 
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */

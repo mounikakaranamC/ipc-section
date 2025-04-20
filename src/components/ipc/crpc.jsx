@@ -18,7 +18,7 @@ const CRPC = () => {
       if (!response.ok) throw new Error('Failed to fetch data');
 
       const result = await response.json();
-      console.log(`API Response for ${type}:, result`);
+      console.log(`API Response for ${type}:`, result);
 
       if (Object.keys(result).length === 0) {
         throw new Error('No data found');

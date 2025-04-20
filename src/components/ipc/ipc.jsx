@@ -2,36 +2,102 @@ import React, { useState, useEffect } from 'react';
 import Header from '../ipc/header.jsx';
 import '../ipc/home.css';
 
-const CRPC = () => {
+const IPC = () => {
   const [numberSearch, setNumberSearch] = useState('');
   const [textSearch, setTextSearch] = useState('');
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
+  // const fetchData = async (query, type) => {
+  //   if (!query.trim()) return;
+  
+  //   try {
+  //     const url = `http://103.168.19.67:5000/value/IPC/${encodeURIComponent(query)}`;
+
+  //     const result = {
+  //       'url': url
+  //     };
+      
+  //     console.log(`Calling: http://103.168.19.67:5000/value/IPC/${encodeURIComponent(query)}`);
+  //     console.log(`Constructed URL for ${type}:`, result);
+  
+  //     setData(result);
+  //     setError(null);
+  //   } catch (err) {
+  //     console.error('Error:', err.message || err);
+  //     setError(`No data found for ${type}`);
+  //     setData(null);
+  //   }
+  // };
+  
+
   // Function to fetch data
   const fetchData = async (query, type) => {
     if (!query.trim()) return;
-
+  
     try {
-        const response = await fetch(`http://103.168.19.67:5000/value/IPC/${encodeURIComponent(query)}`);
-
-      if (!response.ok) throw new Error('Failed to fetch data');
-
+      const url = `http://103.168.19.67:5000/value/IPC/${encodeURIComponent(query)}`;
+      console.log('Fetching from URL:', url);
+  
+      const response = await fetch(url);
+      console.log('Status:', response.status);
+  
+      if (!response.ok) {
+        const text = await response.text(); // Log body for error insight
+        console.error('Error response:', text);
+        throw new Error('Failed to fetch data');
+      }
+  
       const result = await response.json();
-      console.log(`API Response for ${type}:, result`);
-
+      console.log('Fetched data:', result);
+  
       if (Object.keys(result).length === 0) {
         throw new Error('No data found');
       }
-
+  
       setData(result);
       setError(null);
     } catch (err) {
-      console.error('Error:', err);
+      console.error('Fetch error:', err);
       setError(`No data found for ${type}`);
       setData(null);
     }
   };
+
+  // // const fetchData = async (query, type) => {
+  //   if (!query.trim()) return;
+  
+  //   try {
+  //     // Clean query manually
+  //     const cleanedQuery = query.replace(/ /g, '+'); // Replace spaces with +
+  //     const url = `http://103.168.19.67:5000/value/IPC/${cleanedQuery}`;
+  //     console.log('Fetching from:', url);
+  
+  //     const response = await fetch(url);
+  //     console.log('Status:', response.status);
+  
+  //     if (!response.ok) {
+  //       const errorText = await response.text();
+  //       console.error('Error response:', errorText);
+  //       throw new Error('Failed to fetch data');
+  //     }
+  
+  //     const result = await response.json();
+  //     console.log('Fetched data:', result);
+  
+  //     if (Object.keys(result).length === 0) {
+  //       throw new Error('No data found');
+  //     }
+  
+  //     setData(result);
+  //     setError(null);
+  //   } catch (err) {
+  //     console.error('Fetch error:', err);
+  //     setError(`No data found for ${type}`);
+  //     setData(null);
+  //   }
+  // };
+  
 
   // Handle number search
   useEffect(() => {
@@ -110,4 +176,4 @@ const CRPC = () => {
   );
 };
 
-export default CRPC;
+export default IPC;

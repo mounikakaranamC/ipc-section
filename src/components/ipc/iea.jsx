@@ -21,8 +21,8 @@ const IEA = () => {
            throw new Error('Failed to fetch IEA keys');
          }
          const result = await response.json();
-         if (Array.isArray(result)) {
-           setIeaList(result);
+         if (Array.isArray(result.keys)) {
+           setIeaList(result.keys);
          } else {
            console.error('Invalid IEA keys format');
          }
@@ -135,7 +135,7 @@ const IEA = () => {
                 setData([]);
               }
             }}
-            className="input-container"
+            className="input-container1"
             style={{ position: 'relative' }}
           >
             <input
@@ -193,7 +193,7 @@ const IEA = () => {
                     <strong>BSA:</strong> {item.BSA || '??'} &nbsp;&nbsp;
                     <strong>IEA:</strong> {item.IEA || '??'}&nbsp;&nbsp;
                     <br />
-                    <strong>Subject:</strong> {item.Subject}
+                    <strong>Subject:</strong> {item.Subject || '??'}
                   </p>
                 </div>
               ))}
@@ -207,8 +207,8 @@ const IEA = () => {
               <div className="selected-item">
                 <div className="data-box">
                   <p><strong>Title:</strong> {selectedItem.Title}</p>
-                  <p><strong>BSA:</strong> {selectedItem.BSA || '??'}</p>
-                  <p><strong>IEA:</strong> {selectedItem.IEA || '??'}</p>
+                  <p><strong>BSA:</strong> {selectedItem.BSA}</p>
+                  <p><strong>IEA:</strong> {selectedItem.IEA}</p>
                   <p><strong>Subject:</strong> {selectedItem.Subject}</p>
                   <p><strong>Summary:</strong> {selectedItem.Summary}</p>
                 </div>

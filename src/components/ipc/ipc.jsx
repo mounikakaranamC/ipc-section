@@ -21,8 +21,9 @@ const IPC = () => {
           throw new Error('Failed to fetch IPC keys');
         }
         const result = await response.json();
-        if (Array.isArray(result)) {
-          setIpcList(result);
+        console.log("IPC Keys:", result);
+        if (Array.isArray(result.keys)) {
+          setIpcList(result.keys);
         } else {
           console.error('Invalid IPC keys format');
         }
@@ -66,6 +67,7 @@ const IPC = () => {
     if (value.trim()) {
       // filter IPC list
       const filtered = ipcList.filter(ipc => ipc.includes(value));
+      console.log("Filtered IPC Codes:", filtered); 
       setData(filtered);
     } else {
       setData([]);
@@ -135,7 +137,7 @@ const IPC = () => {
                 setData([]);
               }
             }}
-            className="input-container"
+            className="input-container1"
             style={{ position: 'relative' }}
           >
 

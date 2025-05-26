@@ -21,8 +21,8 @@ const CRPC = () => {
           throw new Error('Failed to fetch CRPC keys');
         }
         const result = await response.json();
-        if (Array.isArray(result)) {
-          setCrpcList(result);
+        if (Array.isArray(result.keys)) {
+          setCrpcList(result.keys);
         } else {
           console.error('Invalid keys format for CRPC');
         }
@@ -55,6 +55,35 @@ const CRPC = () => {
       setError('Failed to fetch CRPC details');
     }
   };
+
+  const handleNumberChange = (e) => {
+    const value = e.target.value;
+    setNumberSearch(value);
+    setTextSearch('');
+    setError(null);
+    setSelectedItem(null);
+
+    if (value.trim()) {
+      // filter CRPC list
+      const filtered = crpcList.filter(crpc => crpc.includes(value));
+      setData(filtered);
+    } else {
+      setData([]);
+    }
+  };
+
+  const handleTextChange = (e) => {
+    const value = e.target.value;
+    setTextSearch(value);
+    setNumberSearch('');
+    setError(null);
+    setSelectedItem(null);
+
+    if (value.trim()) {
+      fetchDataByText(value);
+    }
+  };
+
 
   const fetchDataByText = async (query) => {
     try {
@@ -90,34 +119,7 @@ const CRPC = () => {
     };
   }, [navigate]);
 
-  const handleNumberChange = (e) => {
-    const value = e.target.value;
-    setNumberSearch(value);
-    setTextSearch('');
-    setError(null);
-    setSelectedItem(null);
-
-    if (value.trim()) {
-      // filter CRPC list
-      const filtered = crpcList.filter(crpc => crpc.includes(value));
-      setData(filtered);
-    } else {
-      setData([]);
-    }
-  };
-
-  const handleTextChange = (e) => {
-    const value = e.target.value;
-    setTextSearch(value);
-    setNumberSearch('');
-    setError(null);
-    setSelectedItem(null);
-
-    if (value.trim()) {
-      fetchDataByText(value);
-    }
-  };
-
+  
   return (
     <div className="template">
       <div className="box">
@@ -135,7 +137,7 @@ const CRPC = () => {
                 setData([]);
               }
             }}
-            className="input-container"
+            className="input-container1"
             style={{ position: 'relative' }}
           >
             <input
@@ -188,8 +190,8 @@ const CRPC = () => {
                     }}
                   >
                     <p>
-                      <strong>BNS:</strong> {item.BNS || item.BNSS || '??'} &nbsp;&nbsp;
-                      <strong>CRPC:</strong> {item.CRPC || item.CrPC || '??'}<br />
+                      <strong>BNSS:</strong> {item.BNSS || '??'} &nbsp;&nbsp;
+                      <strong>CRPC:</strong> {item.CrPC || '??'}<br />
                       <strong>Subject:</strong> {item.Subject || '??'}
                     </p>
                   </div>
@@ -204,8 +206,8 @@ const CRPC = () => {
               <div className="selected-item">
                 <div className="data-box">
                   <p><strong>Title:</strong> {selectedItem.Title}</p>
-                  <p><strong>BNSS:</strong> {selectedItem.BNS || selectedItem.BNSS}</p>
-                  <p><strong>CRPC:</strong> {selectedItem.CRPC || selectedItem.CrPC}</p>
+                  <p><strong>BNSS:</strong> {selectedItem.BNSS}</p>
+                  <p><strong>CRPC:</strong> {selectedItem.CrPC}</p>
                   <p><strong>Subject:</strong> {selectedItem.Subject}</p>
                   <p><strong>Summary:</strong> {selectedItem.Summary}</p>
                 </div>

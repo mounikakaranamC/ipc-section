@@ -331,7 +331,9 @@ body {
   position: relative;
   width: 95%;
 }
-
+.input-container1 {
+  width: 100%;
+}
 .dropdown-list {
   position: absolute;
   top: 100%;

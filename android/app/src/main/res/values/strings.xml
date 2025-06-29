@@ -2,6 +2,6 @@
 <resources>
     <string name="app_name">ipc</string>
     <string name="title_activity_main">ipc</string>
-    <string name="package_name">com.example.ipc</string>
-    <string name="custom_url_scheme">com.example.ipc</string>
+    <string name="package_name">com.mounika.ipc</string>
+    <string name="custom_url_scheme">com.mounika.ipc</string>
 </resources>

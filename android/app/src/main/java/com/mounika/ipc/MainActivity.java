@@ -1,4 +1,4 @@
-package com.example.ipc;
+package com.mounika.ipc;
 
 import com.getcapacitor.BridgeActivity;
 
